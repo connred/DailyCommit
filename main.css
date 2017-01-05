@@ -1,0 +1,46 @@
+#topbar {
+    height: 60px;
+    width: auto;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: grey;
+}
+#topbarinfo {
+    height: 55px;
+    width: 250px;
+    border: 3px solid black;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    float: left;
+    position: inherit;
+}
+#toptitle {
+    height: 60px;
+    width: 618px;
+    background-color: grey;
+    position: inherit;
+    float: left;
+}
+.title {
+    text-align: center;
+    width: auto;
+    height: 5px;
+    margin-top: 0px;
+    font-family: impact;
+    font-size: 40px;
+    color: white;
+}
+.title2 {
+    text-align: center;
+    width: auto;
+    height: 5px;
+    margin-top: -5px;
+    font-family: impact;
+}
+.g-signin2 {
+    float: right;
+    position: inherit;
+    border: 5px solid black;
+}
