@@ -1,28 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="main.css">
+    <link type="text/css" href="/main.css" rel="stylesheet"></link>
     <meta name="google-signin-client_id" content="100486091355-kggb1no0knblhq4oi7c8iov1kfnj7aut.apps.googleusercontent.com">
+    <script src="/webrtc.io.js"></script>
     <title>VidChat</title>
 </head>
+
 <body>
-   <div id="topbar">
-       <div id="topbarinfo">
-           <p id="name"></p>
-           <p id="email"></p>
-           <p id="id"></p>
-       </div>
-       <div id="toptitle">
-           <p class="title">VidChat</p>
-           <p class="title2">by Redmond</p>
-       </div>
-       <div class="g-signin2" data-onsuccess="onSignIn" data-width="150" data-height="50" float="left" data-theme="dark"></div>
-   </div>
-   
-   <script src="https://apis.google.com/js/platform.js" async defer></script>
-   <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-   <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-   <script src="main.js"></script>
+    <div id="topbar">
+        <div id="topbarinfo">
+            <p id="name" class="info"></p>
+            <p id="email" class="info"></p>
+        </div>
+        <div id="toptitle">
+            <p class="title">VidChat</p>
+            <p class="title2">by Redmond</p>
+        </div>
+        <div class="g-signin2" data-onsuccess="onSignIn" data-width="150" data-height="50" float="left" data-theme="dark"></div>
+    </div>
+    <div class="break"></div>
+    <div id="videobox">
+        <div id="vid">
+            <video id="you" class="flip" autoplay width="263" height="200" style="position: absolute; left: 0px; bottom: 0px;"></video>
+        </div>
+        <div id="chat">
+            <div id="chattitle">Chat Room</div>
+            <div id="log">
+                <div id="messages"></div>
+            </div>
+            <div id="controls">
+                <input id="chatinput" type="text" placeholder="Message:" />
+                <button id="send">Send</button>
+            </div>
+        </div>
+    </div>
+    <div class="buttonBox">
+        <div id="fullscreen" class="button">Enter Full Screen</div>
+        <div id="newRoom" class="button">Create A New Room</div>
+    </div>
+    <script src="main.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=appStart" async defer></script>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="main.js"></script>
 </body>
+
 </html>

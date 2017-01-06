@@ -1,3 +1,9 @@
+.break {
+    height: 10px;
+    width: auto;
+    background-color: darkslategray;
+}
+
 #topbar {
     height: 60px;
     width: auto;
@@ -6,6 +12,22 @@
     margin-right: 0px;
     background-color: grey;
 }
+
+.info {
+    margin: 0px;
+    margin-top: 0px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    font-size: 12px;
+    font-family: impact;
+    word-spacing: 2px;
+    color: black;
+    text-align: center;
+    height: 5px;
+}
+
 #topbarinfo {
     height: 55px;
     width: 250px;
@@ -16,6 +38,7 @@
     float: left;
     position: inherit;
 }
+
 #toptitle {
     height: 60px;
     width: 618px;
@@ -23,6 +46,7 @@
     position: inherit;
     float: left;
 }
+
 .title {
     text-align: center;
     width: auto;
@@ -30,8 +54,10 @@
     margin-top: 0px;
     font-family: impact;
     font-size: 40px;
-    color: white;
+    color: whitesmoke;
+    letter-spacing: 8px;
 }
+
 .title2 {
     text-align: center;
     width: auto;
@@ -39,8 +65,149 @@
     margin-top: -5px;
     font-family: impact;
 }
+
 .g-signin2 {
     float: right;
     position: inherit;
     border: 5px solid black;
+}
+
+#videobox {
+    height: 525px;
+    width: auto;
+    border: 5px solid black;
+}
+
+#chat {
+    height: 525px;
+    width: 200px;
+    float: right;
+    position: inherit;
+    border-left: 5px solid black;
+    background-color: aliceblue;
+}
+
+#chattitle {
+    height: 28px;
+    width: 200px;
+    border-bottom: 2px solid black;
+    font-family: impact;
+    text-align: center;
+    font-size: 23px;
+}
+
+#log {
+    height: 468px;
+    width: 200px;
+    border-bottom: 2px solid black;
+}
+#messages {
+    overflow: scroll;
+    font: 300 12px/36px 'light', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    height: 466px;
+    letter-spacing: 1px;
+    margin-bottom: 0px;
+    padding: 5px 10px;
+    width: 200px;
+}
+
+.buttonbox {
+    height: 100px;
+    width: auto;
+    border-bottom: 5px solid black;
+    border-left: 5px solid black;
+    border-right: 5px solid black;
+}
+
+#vid {
+    height: 525px;
+    width: 1049px;
+    background-color: skyblue;
+    position: inherit;
+    float: left;
+}
+
+
+/*.button {
+    position: fixed;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; /* Safari 
+    transition-duration: 0.4s;
+    color: black;
+    font-family: impact;
+    font-size: 60px;
+    margin-top: 215px;
+    margin-left: 400px;
+}
+
+.button:hover {
+    border-radius: 8px;
+    background-color: white; /* Green 
+    color: white;
+}*/
+#you {
+    position: absolute;
+    top: 400px;
+    left: 50px;
+    border: 2px solid black;
+}
+.buttonBox {
+    position: absolute;
+    top: 610px;
+    left: 8px;
+    z-index: 1;
+    border: 5px solid black;
+}
+
+#chatinput {
+    background: none repeat scroll 0 0 #F9F9F9;
+    border: 1px solid #CCCCCC;
+    border-radius: 0px 0px 5px 5px;
+    font: 300 14px/40px 'light', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    height: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 0px;
+    padding: 5px 10px;
+    width: 100px;
+}
+
+.flip {
+    -webkit-transform: rotateY(180deg);
+}
+
+.button {
+    -moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
+    box-shadow: inset 0px 1px 0px 0px #ffffff;
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf));
+    background: -moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+    background-color: #ededed;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    color: #777777;
+    font-family: arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 24px;
+    text-decoration: none;
+    text-shadow: 1px 1px 0px #ffffff;
+}
+
+.button:hover {
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
+    background: -moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+    background-color: #dfdfdf;
+}
+
+.button:active {
+    position: relative;
+    top: 1px;
 }
