@@ -31,6 +31,7 @@ function appStart() {
     $('.g-signout2').click(function () {
         signOut();
     })
+    initFullScreen();
 }
 
 function initSigninV2() {
@@ -121,3 +122,11 @@ function loadChat() {
 //
 // NODE - Video...
 //
+function initFullScreen() {
+    var button = document.getElementById("fullscreen");
+    button.addEventListener('click', function (event) {
+        var elem = document.getElementById("vid");
+        //show full screen
+        elem.webkitRequestFullScreen();
+    });
+}
