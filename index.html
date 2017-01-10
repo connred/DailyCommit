@@ -18,8 +18,10 @@
             <p class="title">VidChat</p>
             <p class="title2">by Redmond</p>
         </div>
-        <div class="g-signin2" data-onsuccess="onSignIn" data-width="150" data-height="50" float="left" data-theme="dark"></div>
-        <div class="g-signout2" data-onsuccess="signOut" data-width="150" data-height="50" float="left" data-theme="darl" hidden></div>
+        <div class="g-signin2" data-onsuccess="onSignIn" data-width="205" data-height="50" float="left" data-theme="dark" data-longtitle="true"></div>
+        <div class="g-signout2" hidden>
+            <button id="g-signout2">Temp Sign Out</button>
+        </div>
     </div>
     <div class="break"></div>
     <div id="videobox">
@@ -29,7 +31,7 @@
         <div id="chat">
             <div id="chattitle">Chat Room</div>
             <div id="log">
-                <div id="messages"></div>
+                <div id="messages" hidden></div>
             </div>
             <div id="controls">
                 <input id="chatinput" type="text" placeholder="Message:" />
@@ -39,9 +41,8 @@
     </div>
     <div class="buttonBox">
         <div id="fullscreen" class="button">Enter Full Screen</div>
-        <div id="newRoom" class="button">Create A New Room</div>
+        <div id="newRoom" class="button" hidden>Create A New Room</div>
     </div>
-    <script src="main.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=appStart" async defer></script>
     <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>

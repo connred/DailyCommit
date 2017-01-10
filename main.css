@@ -41,7 +41,7 @@
 
 #toptitle {
     height: 60px;
-    width: 618px;
+    width: 790px;
     background-color: grey;
     position: inherit;
     float: left;
@@ -72,7 +72,11 @@
     border: 5px solid black;
 }
 .g-signout2 {
-
+    float: right;
+    position: inherit;
+    border: 5px solid black;
+    width: 205px;
+    height: 50px;
 }
 
 #videobox {

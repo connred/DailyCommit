@@ -1,9 +1,14 @@
-if (window.location.hostname === '127.0.0.1') {
+/*if (window.location.hostname === '127.0.0.1') {
     window.location = 'http://localhost:1898';
-}
+}*/
+//
+// GOOGLE 
+//
+var socket = io.connect();
+
 function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
-    username = profile.getName();
+    profile = googleUser.getBasicProfile();
+    username = profile.getGivenName();
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
@@ -12,11 +17,20 @@ function onSignIn(googleUser) {
     $('#email').html('<p>' + 'Email' + ':' + profile.getEmail() + '</p>');
     $('.g-signin2').hide();
     $('.g-signout2').show();
+    loadChat();
+    $('#chatinput').prop('disabled', false);
+    $('#messages').show();
+    socket.emit('welcome');
+    socket.emit('user', username);
 }
 var auth2;
-
+var username;
+var profile;
 function appStart() {
     gapi.load('auth2', initSigninV2);
+    $('.g-signout2').click(function () {
+        signOut();
+    })
 }
 
 function initSigninV2() {
@@ -38,15 +52,15 @@ function signinChanged(isSignedIn) {
         //$('#email').html('<p>' + profile.getEmail() + '</p>');
         //$('#photo').html('<img src="' + profile.getImageUrl() + '">');
         // some other properties
-        console.log(profile.getId());
-        console.log(profile.getName());
-        console.log(profile.getGivenName());
-        console.log(profile.getFamilyName());
-        console.log(profile.getImageUrl());
-        console.log(profile.getEmail());
-        console.log(googleUser.getHostedDomain());
-        console.log(authResponse.id_token);
-        console.log(authResponse.expires_at);
+        console.log('ID: ' + profile.getId());
+        console.log('Name: ' + profile.getName());
+        console.log('FName: ' + profile.getGivenName());
+        console.log('LName: ' + profile.getFamilyName());
+        console.log('ProPic: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail());
+        console.log('HostedDomain: ' + googleUser.getHostedDomain());
+        console.log('IDtoken: ' + authResponse.id_token);
+        console.log('Experies@: ' + authResponse.expires_at);
     }
     else {
         console.log('the user must not be signed in if this is printing');
@@ -62,6 +76,48 @@ function signOut() {
     auth2.signOut().then(function () {
         console.log('User signed out.');
     });
+    $('#name').html('<p>' + "" + '</p>');
+    $('#email').html('<p>' + "" + '</p>');
+    $('#chatinput').prop('disabled', true);
+    $('#messages').html('');
+    $('#messages').hide();
     $('.g-signout2').hide();
     $('.g-signin2').show();
+    socket.emit('disconnect');
 }
+//
+// NODE - Chat Portion 
+//
+function loadChat() {
+    socket.on('Welcome', function (data) {
+        $('#messages').append('<div><strong>' + data.text + '</strong></div>');
+    });
+    $('#send').click(function () {
+        var input = $('#chatinput');
+        var text = input.val().trim();
+        if (text.length > 0) {
+            socket.emit('message', text);
+            //console.log('Message sent by', name,":'",text,"'");
+        }
+        input.val('');
+    })
+    socket.on('message', function (data) {
+        $('#messages').append('<div><strong>' + username + ': ' + data.message + '</strong></div>');
+        console.log('Message sent by', username,":'", data.message,"'");
+    });
+    socket.on('otherUserConnect', function (data) {
+        $('#messages').append('<div><strong>' + data + ' connected</strong></div>');
+    });
+    socket.on('otherUserDisconnect', function (data) {
+        $('#messages').append('<div><strong>' + data + ' disconnected</strong></div>');
+    });
+    // Pressing enter sends
+    $("#chatinput").keyup(function(event){
+        if(event.keyCode == 13){
+            $("#send").click();
+        }
+    });
+}
+//
+// NODE - Video...
+//
