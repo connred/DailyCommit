@@ -26,6 +26,7 @@ function onSignIn(googleUser) {
 var auth2;
 var username;
 var profile;
+
 function appStart() {
     gapi.load('auth2', initSigninV2);
     $('.g-signout2').click(function () {
@@ -104,7 +105,7 @@ function loadChat() {
     })
     socket.on('message', function (data) {
         $('#messages').append('<div><strong>' + username + ': ' + data.message + '</strong></div>');
-        console.log('Message sent by', username,":'", data.message,"'");
+        console.log('Message sent by', username, ":'", data.message, "'");
     });
     socket.on('otherUserConnect', function (data) {
         $('#messages').append('<div><strong>' + data + ' connected</strong></div>');
@@ -113,8 +114,8 @@ function loadChat() {
         $('#messages').append('<div><strong>' + data + ' disconnected</strong></div>');
     });
     // Pressing enter sends
-    $("#chatinput").keyup(function(event){
-        if(event.keyCode == 13){
+    $("#chatinput").keyup(function (event) {
+        if (event.keyCode == 13) {
             $("#send").click();
         }
     });
