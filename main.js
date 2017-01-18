@@ -121,6 +121,8 @@ function loadChat() {
     });
 }
 //
+// MONGODB
+//
 // NODE - Video...
 //
 function initFullScreen() {
