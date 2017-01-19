@@ -1,14 +1,15 @@
 var express = require('express');
-var app = express();
+//var app = express();
 //var http = require('http').Server(app);
-app.use('/', express.static(__dirname));
-var server = require('http').createServer(app);
-var port = process.env.PORT || 8080;
-server.listen(port);
-var mongo = require('mongodb').MongoClient
-var mongo_url = "mongo://localhost:27017/apcsp"
-var users = [];
-var io = require('socket.io').listen(server);
+//app.use('/', express.static(__dirname));
+//var server = require('http').createServer(app);
+//var port = process.env.PORT || 8080;
+//server.listen(port);
+var bodyParser = require('body-parser');
+var mongo = require('mongodb').MongoClient;
+var mongo_url = "mongo://localhost:27017/apcsp";
+//var users = [];
+/*var io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
     socket.on('welcome', function () {
         text: "Chat here:"
@@ -37,7 +38,7 @@ io.sockets.on('connection', function (socket) {
         })
     });
     //
-});
+});*/
 mongo.connect(mongo_url, function (err, db){
     if (err){
         log('DB Connection Error');
