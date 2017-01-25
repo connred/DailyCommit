@@ -4,15 +4,45 @@ if (window.location.hostname === '127.0.0.1') {
 //
 // GOOGLE 
 //
+var auth2;
+var username;
+var profile;
+var authResponse;
+function route(url) {
+   return 'http://192.168.1.9:3000' + url;
+}
+function post(url, json, success, error) {
+    $.ajax({
+        url: route(url)
+        , method: 'POST'
+        , data: json
+        , headers: {
+            'Authorization': authResponse.id_token
+        }
+        , success: function () {
+            if (success) success();
+        }
+        , error: function () {
+            if (error) error();
+        }
+    });
+}
 var socket = io.connect();
 
 function onSignIn(googleUser) {
     profile = googleUser.getBasicProfile();
     username = profile.getGivenName();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail());
+    authRespone = googleUser.getAuthResponse();
+    var login = {
+        'id': profile.getId()
+        , 'name': profile.getName()
+        , 'givenName': profile.getGivenName()
+        , 'familyName': profile.getFamilyName()
+        , 'imageUrl': profile.getImageUrl()
+        , 'email': profile.getEmail()
+        , 'hostedDomain': googleUser.getHostedDomain()
+    }
+    post('/login', login);
     $('#name').html('<p>' + profile.getName() + '</p>');
     $('#email').html('<p>' + 'Email' + ':' + profile.getEmail() + '</p>');
     $('.g-signin2').hide();
@@ -23,9 +53,7 @@ function onSignIn(googleUser) {
     socket.emit('welcome');
     socket.emit('user', username);
 }
-var auth2;
-var username;
-var profile;
+
 
 function appStart() {
     gapi.load('auth2', initSigninV2);

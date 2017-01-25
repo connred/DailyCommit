@@ -1,14 +1,15 @@
-var http = require('http');
-var Mongo = require('mongodb').MongoClient;
 var express = require('express');
-var io = require('socket.io').listen(server);
-var server = require('http').createServer(app);
-var bodyParser = require('body-parser');
-//
 var app = express();
+var http = require('http').Server(app);
 app.use('/', express.static(__dirname));
+var server = require('http').createServer(app);
+var port = process.env.PORT || 8080;
+server.listen(port);
+var bodyParser = require('body-parser');
+var mongo = require('mongodb').MongoClient;
+var mongo_url = "mongo://localhost:27017/apcsp";
 var users = [];
-var mongoUrl = 'mongodb://localhost:27017/vidchat';
+var io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
     socket.on('welcome', function () {
         text: "Chat here:"
@@ -38,29 +39,11 @@ io.sockets.on('connection', function (socket) {
     });
     //
 });
-Mongo.connect(mongoUrl, function(err, db) {
-
+mongo.connect(mongo_url, function (err, db) {
     if (err) {
-        log('MongoDB connection error');
-    } else {
-        log('Connected to MongoDB');
+        log('DB Connection Error');
     }
-
-    Mongo.ops = {};
-
-});
-
-function log(msg) {
-    console.log(msg);
-}
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended : false }));
-var app = express();
-
-app.get('/', function(req, res) {
-    res.send('this is stoooooopid');
-});
-
-app.listen(8080, function() {
-    log('listening on port 8080');
-});
+    else {
+        log('Connected to DB')
+    }
+})
