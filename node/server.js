@@ -125,12 +125,12 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(allowCrossDomain);
 app.use(authorize);
-app.post('/login', function (req, res) {
+app.post('/login', function (req, res, next) {
     log('/login req.body = ', req.body);
     var query = {
         id: req.body.id
     };
-    Mongo.ops.upsert('login', query, req.body, function (err, response) {
+    Mongo.ops.insertsert('login', query, function (err, response) {
         if (err) {
             console.log(err);
         }
@@ -142,10 +142,8 @@ app.post('/login', function (req, res) {
 });
 app.post('/add', function (req, res, next) {
     log('/add req.body =', req.body);
-    var query = {
-        value: req.body
-    };
-    Mongo.ops.upsert('add', query, req.body, function (err, response) {
+    var payload = req.body
+    Mongo.ops.insert('add', payload, function (err, response) {
         if (err) {
             console.log(err);
         }

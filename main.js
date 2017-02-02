@@ -8,7 +8,7 @@ if (window.location.hostname === '127.0.0.1') {
 }
 // prepend the url of node.js server
 function route(url) {
-    return 'http://10.10.102.136:3000' + url;
+    return 'http://10.10.102.33:3000' + url;
 }
 var profile; // google user profile
 var authResponse; // google user auth response
@@ -62,14 +62,13 @@ function post(url, json, success, error) {
 }
 
 function addButton(json, url, success, error) {
-    var array = [];
+    var text = $('#plus-name').val();
     var jsonData = {
-        'value' : $('#plus-name').val()
+        id: profile.getId(),
+        text: text
     };
-    array.push(jsonData);
     post('/add', jsonData, function () {
-        $('#input').html('<div><strong>' + jsonData.value + '</strong></div>');
-        console.log('Client side log' + JSON.stringify(array));
+        $('#input').append('<div><strong>' + jsonData.text + '</strong></div>');
     }, function () {
         console.log('Error in sending data');
     });
