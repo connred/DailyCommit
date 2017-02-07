@@ -130,7 +130,7 @@ app.post('/login', function (req, res, next) {
     var query = {
         id: req.body.id
     };
-    Mongo.ops.insertsert('login', query, function (err, response) {
+    Mongo.ops.insert('login', query, function (err, response) {
         if (err) {
             console.log(err);
         }
@@ -153,6 +153,16 @@ app.post('/add', function (req, res, next) {
         }
     });
 });
+app.get('/add', function(req, res){
+    log('//client successfully got collection');
+    Mongo.ops.find('add', {}, function(err, response){
+        if(err){
+            log(err)
+        }else{
+            res.status(200).send(response)
+        }
+    })
+})
 // listen on port 3000
 app.listen(3000, function () {
     cacheWellKnownKeys();
@@ -185,7 +195,7 @@ function cacheWellKnownKeys() {
             var maxAge = parseInt(values[1].split('=')[1]);
             // update the key cache when the max age expires
             setTimeout(cacheWellKnownKeys, maxAge * 1000);
-            log('Cached keys = ', keyCache.keys);
+            //log('Cached keys = ', keyCache.keys);
         });
     });
 }

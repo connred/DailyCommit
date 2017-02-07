@@ -2,32 +2,36 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="google-signin-client_id" content="100486091355-kggb1no0knblhq4oi7c8iov1kfnj7aut.apps.googleusercontent.com">
-  <title>The Daily Commit</title>
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="main.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="google-signin-client_id" content="100486091355-kggb1no0knblhq4oi7c8iov1kfnj7aut.apps.googleusercontent.com">
+    <title>The Daily Commit</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="main.css"> </head>
 
 <body>
-  <div class="g-signin2" data-onsuccess="onSignIn"></div>
-  <a href="#" onclick="signOut();">Sign out</a>
-  <a href="#" onclick="disconnect();">Disconnect</a>
-  <div id="email"></div>
-  <div id="photo"></div>
-  
-  <button id="plus-button">+</button>
-  <div id="plus-button-dialog">
-      <input id="plus-name">
-      <button id="plus-add-button">Add</button>
-  </div>
-  <div id="input"></div>
-  
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
-  <script src="main.js"></script>
-  <script src="https://apis.google.com/js/platform.js?onload=appStart" async defer></script>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div> <a href="#" onclick="signOut();">Sign out</a> <a href="#" onclick="disconnect();">Disconnect</a>
+    <div id="email"></div>
+    <div id="photo"></div>
+    <button id="plus-button">+</button>
+    <div id="plus-button-dialog">
+        <input id="plus-name">
+        <button id="plus-add-button">Add</button>
+    </div>
+    <button id="change-button">Change</button>
+    <div id="change-button-dialog">
+        <button id="changeButton">Update</button>
+        <p>Select an item</p>
+        <br />
+        <select id="item-menu">
+            <option selected value="base">Please Select</option>
+        </select>
+    </div>
+    <div id="input"></div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <script src="main.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=appStart" async defer></script>
 </body>
 
 </html>

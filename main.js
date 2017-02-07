@@ -8,7 +8,7 @@ if (window.location.hostname === '127.0.0.1') {
 }
 // prepend the url of node.js server
 function route(url) {
-    return 'http://10.10.102.33:3000' + url;
+    return 'http://192.168.1.68:3000' + url;
 }
 var profile; // google user profile
 var authResponse; // google user auth response
@@ -28,6 +28,13 @@ function onSignIn(googleUser) {
     $('.g-signin2').hide();
     $('#email').html('<p>' + profile.getEmail() + '</p>');
     $('#photo').html('<img src="' + profile.getImageUrl() + '">');
+    get('/add', function (data) {
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].id && data[i].text) {
+                $('#input').append('<div><strong><span>' + data[i].text + '</span></strong></div>');
+            }
+        }
+    });
 }
 
 function signOut() {
@@ -61,14 +68,30 @@ function post(url, json, success, error) {
     });
 }
 
+function get(url, success, error) {
+    $.ajax({
+        url: route(url)
+        , method: 'GET'
+        , headers: {
+            'Authorization': authResponse.id_token
+        }
+        , success: function (data) {
+            if (success) success(data);
+        }
+        , error: function () {
+            if (error) error();
+        }
+    })
+}
+
 function addButton(json, url, success, error) {
     var text = $('#plus-name').val();
     var jsonData = {
-        id: profile.getId(),
-        text: text
+        id: profile.getId()
+        , text: text
     };
     post('/add', jsonData, function () {
-        $('#input').append('<div><strong>' + jsonData.text + '</strong></div>');
+        $('#input').append('<div><strong><span>' + jsonData.text + '</span></strong></div>');
     }, function () {
         console.log('Error in sending data');
     });
@@ -76,11 +99,37 @@ function addButton(json, url, success, error) {
 $('#plus-button').click(function () {
     $('#plus-button-dialog').dialog('open');
 });
+$('#change-button').click(function () {
+    $('#change-button-dialog').dialog('open');
+    addEntries('/add');
+});
+function addEntries(){
+    get('/add', function (data) {
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].id && data[i].text) {
+                $('#item-menu').append('<option>' + data.text + '</option>');
+            }
+        }
+    });
+}
 $('#plus-add-button').click(function () {
     addButton('/add');
     $('#plus-button-dialog').dialog('close');
 });
+$('#changeButton').click(function () {
+    console.log('a change button was clicked');
+    updateCollections();
+});
+function updateCollections(){
+    
+}
 $('#plus-button-dialog').dialog({
+    autoOpen: false
+    , height: 500
+    , width: 450
+    , modal: true
+});
+$('#change-button-dialog').dialog({
     autoOpen: false
     , height: 400
     , width: 350
