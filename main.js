@@ -8,7 +8,7 @@ if (window.location.hostname === '127.0.0.1') {
 }
 // prepend the url of node.js server
 function route(url) {
-    return 'http://192.168.1.68:3000' + url;
+    return 'http://10.10.102.101:3000' + url;
 }
 var profile; // google user profile
 var authResponse; // google user auth response
@@ -83,6 +83,22 @@ function get(url, success, error) {
         }
     })
 }
+function put(url, json, success, error) {
+    $.ajax({
+        url: route(url)
+        , method: 'PUT'
+        , data: json
+        , headers: {
+            'Authorization': authResponse.id_token
+        }
+        , success: function (data) {
+            if (success) success(data);
+        }
+        , error: function () {
+            if (error) error();
+        }
+    })
+}
 
 function addButton(json, url, success, error) {
     var text = $('#plus-name').val();
@@ -107,7 +123,7 @@ function addEntries(){
     get('/add', function (data) {
         for (var i = 0; i < data.length; i++) {
             if (data[i].id && data[i].text) {
-                $('#item-menu').append('<option>' + data.text + '</option>');
+                $('#item-menu').append('<option>' + data[i].text + '</option>');
             }
         }
     });
@@ -121,6 +137,9 @@ $('#changeButton').click(function () {
     updateCollections();
 });
 function updateCollections(){
+    var val = $('#item-menu').val().trim();
+    console.log(val);
+    put('/add');
     
 }
 $('#plus-button-dialog').dialog({
@@ -131,7 +150,7 @@ $('#plus-button-dialog').dialog({
 });
 $('#change-button-dialog').dialog({
     autoOpen: false
-    , height: 400
-    , width: 350
+    , height: 600
+    , width: 550
     , modal: true
 });

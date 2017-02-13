@@ -153,6 +153,17 @@ app.post('/add', function (req, res, next) {
         }
     });
 });
+app.put('/add', function(req, res){
+    log('//attempted to update entry');
+    var payload = req.body
+    Mongo.ops.updateOne('add', payload.id, payload.update, function(err, response){
+        if (err) {
+            console.log(err);
+        } else {
+            res.status(201).send('ok');
+        }
+    })
+});
 app.get('/add', function(req, res){
     log('//client successfully got collection');
     Mongo.ops.find('add', {}, function(err, response){
